@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>FakeBook</title>
 
@@ -75,9 +76,20 @@
 
         <div class="middle">
 
+            <input type="file" accept="image/*" name="image" id="file">
+
+            <br>
+
+            <form action="feed" method="get">
+
+                <button>Create Post</button>
+
+            </form>
+
         </div>
 
 
     </div>
 </body>
+
 </html>
