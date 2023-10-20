@@ -2,7 +2,6 @@
 <html>
 
 <head>
-    <title>FakeBook</title>
 
     <style>
         * {
@@ -10,86 +9,100 @@
             padding: 0;
             border: 0;
             box-sizing: border-box;
+        }
 
-            #head {
-                width: 100%;
-                min-height: 6vh;
-                background-color: aqua;
-            }
+        #head {
+            width: 100%;
+            max-height: 10vh;
+            text-align: center;
+            background-color: black;
+        }
 
-            #container {
-                min-height: 100vh;
-                display: flex;
-            }
+        #body {
+            width: 100%;
+            min-height: 80vh;
+            max-height: 90vh;
+        }
 
-            .left {
-                width: 20vw;
-                background-color: white;
-            }
+        #container {
+            min-height: 50vh;
+            width: 50vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: lightgrey;
+            margin-left: 25vw;
+            margin-right: 25vw;
+            margin-top: 15vh;
+            margin-bottom: 25vh;
+        }
 
-            .middle {
-                width: 60vw;
-                background-color: white;
-            }
+        #upperContainer {
+            min-height: 10vh;
+            width: auto;
+            border-color: black;
+            border-style: dotted;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 25%;
+            margin-right: 25%;
+        }
 
-            .img {
-                border-radius: 50%;
-                object-fit: contain;
-                width: 200px;
-                height: 200px;
-            }
+        .button {
+            background-color: black;
+            color: white;
+            border: none;
+            font-size: 25px;
+            width: 100px;
+            height: 30px;
+            border-radius: 10px;
+        }
 
-            .center {
-                display: block;
-                margin-left: auto;
-                margin-right: auto;
-                width: 10vw;
-                text-align: center;
-                max-width: 12vw;
-            }
-
-            .splitter {
-                width: 20vw;
-                height: 25%;
-                background: grey;
-            }
+        .txtArea {
+            width: 100%;
+            max-width: 100%;
+            max-height: 100%;
+            height: 200px;
         }
     </style>
 
+    <div id="head">
+
+        <h1 style="color: white; font-size: 80px;">FakeBook</h1>
+
+    </div>
+
 </head>
 
-<body>
-
-    <div id="head">
-        <h1>FakeBook</h1>
-    </div>
+<body id="body">
 
     <div id="container">
 
-        <div class="left">
-
-            <div class="center">
-
-
-            </div>
-        </div>
-
-        <div class="middle">
-
-            <input type="file" accept="image/*" name="image" id="file">
-
-            <br>
+        <div id="upperContainer">
 
             <form action="feed" method="get">
 
-                <button>Create Post</button>
+                <input type="file" accept="image/*" name="image" id="file">
+
+                <br><br>
+
+                <label>Caption:</label>
+
+                <br>
+
+                <textarea class="txtArea"></textarea>
+
+                <br>
+
+                <button class="button">Post</button>
 
             </form>
 
         </div>
 
-
     </div>
+
 </body>
 
 </html>

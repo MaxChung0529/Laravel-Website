@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>FakeBook</title>
 
     <style>
         * {
@@ -13,11 +12,12 @@
             #head {
                 width: 100%;
                 min-height: 6vh;
-                background-color: aqua;
+                text-align: center;
+                background-color: black;
             }
 
             #container {
-                min-height: 100vh;
+                width: 100vh;
                 display: flex;
             }
 
@@ -55,13 +55,13 @@
         }
     </style>
 
+    <div id="head">
+        <h1 style="color: white; font-size: 80px;">FakeBook</h1>
+    </div>
+
 </head>
 
 <body>
-
-    <div id="head">
-        <h1>FakeBook</h1>
-    </div>
 
     <div id="container">
 

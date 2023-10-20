@@ -2,22 +2,13 @@
 <html>
 
 <style>
+
     #container {
         height: 100vh;
+        display: flex;
         align-items: center;
         justify-content: center;
-        display: flex;
         background-color: white;
-    }
-
-    body {
-        margin: 0;
-        padding: 10;
-        height: 100%;
-        max-height: 100%;
-        background: black;
-        float: left;
-        width: 100%;
     }
 
     label {
@@ -35,16 +26,13 @@
         width: 100px;
         font-size: 20px;
         margin-top: 10px;
-
     }
-
-    button:hover {}
 </style>
 
-<body>
+<body style="background-color: black;">
 
     <div id="container">
-        <form action="processlogin.php" method="post">
+        <form action="processregister.php" method="post">
 
             <label for="UserName">Username:</label>
             <br>

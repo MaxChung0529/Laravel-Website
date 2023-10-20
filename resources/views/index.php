@@ -10,20 +10,35 @@
     }
 
     h1 {
-        font-size: 200px;
+        font-size: 180px;
+        height: 250px;
+        width: auto;
         font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     }
 
     #container {
         min-height: 100vh;
-        display: flex;
         align-items: center;
         justify-content: center;
         display: flex;
     }
 
-    #lowerContainer {
-        padding-left: 100px;
+    #upperContainer {
+        font-size: 180px;
+        padding: 10px;
+        height: 250px;
+        width: auto;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    }
+
+    #rightContainer {
+        height: 250px;
+        width: 300px;
+        display: flex;
+        flex-direction: column;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .button {
@@ -39,15 +54,17 @@
     .button:hover {
         background-color: grey;
     }
-
-
 </style>
 
 <div id="container">
 
-    <h1>FakeBook</h1>
+    <div id="upperContainer">
 
-    <div id="lowerContainer">
+        <h1>FakeBook</h1>
+
+    </div>
+
+    <div id="rightContainer">
 
         <form action="login" method="get">
 
@@ -63,7 +80,9 @@
 
         </form>
 
+
     </div>
+
 </div>
 
 </html>
