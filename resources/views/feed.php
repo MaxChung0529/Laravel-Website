@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 
     <style>
@@ -16,9 +17,45 @@
                 background-color: black;
             }
 
-            #container {
-                width: 100vh;
+            #body {
+                width: 100%;
+                min-height: 80vh;
+                max-height: 90vh;
                 display: flex;
+                align-items: center;
+                justify-content: center;
+                background-color: whitesmoke;
+            }
+
+            #container {
+                height: 90vh;
+                width: 50vw;
+                margin-left: 25vw;
+                display: flex;
+                align-items: center;
+                flex-direction: column;
+                background-color: grey;
+            }
+
+            #profileContainer {
+                width: 50vw;
+                height: 7vh;
+                background-color: chartreuse;
+            }
+
+            #picContainer {
+                height: 56vh;
+                width: 24vw;
+                align-items: center;
+                justify-content: center;
+                background-color: red;
+                margin-top: 3vh;
+            }
+
+            #captionContainer {
+                width: 40vw;
+                height: 20vh;
+                background-color: aqua;
             }
 
             .left {
@@ -31,11 +68,20 @@
                 background-color: white;
             }
 
+            .profilePic {
+                height: 5vh;
+                width: 5vh;
+                border-radius: 25px;
+                margin-left: 10px;
+                margin-top: 10px;
+            }
+
             .img {
-                border-radius: 50%;
-                object-fit: contain;
-                width: 200px;
-                height: 200px;
+                height: 56vh;
+                max-width: 24vw;
+                width: auto;
+                display: flex;
+                margin: auto;
             }
 
             .center {
@@ -65,19 +111,21 @@
 
     <div id="container">
 
-        <div class="left">
+        <div id="profileContainer">
+            <img src="https://i.ytimg.com/vi/UCwLisILOhA/maxresdefault.jpg" class="profilePic" alt="miles">
 
-            <div class="center">
-
-
-            </div>
+            JakeDaDawg
         </div>
 
-        <div class="middle">
-
+        <div id="picContainer">
+            <img src="https://www.w3schools.com/images/w3schools_green.jpg" class="img">
         </div>
 
+        <div id="captionContainer">
+            Hello
+        </div>
 
     </div>
 </body>
+
 </html>

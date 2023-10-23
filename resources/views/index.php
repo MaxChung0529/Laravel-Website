@@ -38,7 +38,7 @@
         flex-direction: column;
         display: flex;
         align-items: center;
-        justify-content: center;
+        justify-content: center;ol b                                  0
     }
 
     .button {

@@ -1,36 +1,58 @@
 <!DOCTYPE html>
 <html>
 
-<style>
+<head>
+    <style>
+        #container {
+            min-height: 80vh;
+            max-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            display: flex;
+            background-color: blue;
+        }
 
-    #container {
-        height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        display: flex;
-        background-color: white;
-    }
+        #head {
+            width: 100vw;
+            max-height: 10vh;
+            text-align: center;
+            background-color: black;
+        }
 
-    label {
-        text-align: left;
-        font-size: 35px;
-        width: 100px
-    }
+        #body {
+            width: 100vw;
+            min-height: 80vh;
+            max-height: 90vh;
+            background-color: brown;
+        }
 
-    input {
-        width: 500px;
-        height: 50px;
-    }
+        label {
+            text-align: left;
+            font-size: 35px;
+            width: 100px
+        }
 
-    button {
-        width: 100px;
-        font-size: 20px;
-        margin-top: 10px;
-    }
-</style>
+        input {
+            width: 500px;
+            height: 50px;
+        }
 
-<body style="background-color: black;">
+        button {
+            width: 100px;
+            font-size: 20px;
+            margin-top: 10px;
+        }
+    </style>
+
+    <div id="head">
+
+        <h1 style="color: white; font-size: 80px;">FakeBook</h1>
+
+    </div>
+</head>
+
+<body>
 
     <div id="container">
         <form action="processlogin.php" method="post">
