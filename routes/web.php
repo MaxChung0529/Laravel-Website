@@ -1,6 +1,10 @@
 <?php
 
+use App\Http\Controllers\UsersController;
+use App\Models\Users;
+use Database\Seeders\UsersTableseeder;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,9 +21,7 @@ Route::get('/', function () {
     return ['Laravel' => app()->version()];
 });
 
-Route::get('/index', function () {
-    return view('index');
-});
+Route::get('/index', [UsersController::class, 'index']);
 
 Route::get('/feed', function () {
     return view('feed');
@@ -32,6 +34,9 @@ Route::get('/login', function () {
 Route::get('/register', function () {
     return view('register');
 });
+
+Route::post('/process-register.php', [UsersController::class, 'register']);
+
 
 Route::get('/createPost', function () {
     return view('createPost');

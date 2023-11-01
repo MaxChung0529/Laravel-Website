@@ -24,7 +24,7 @@
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                background-color: whitesmoke;
+                background-color: yellow;
             }
 
             #container {
@@ -56,6 +56,12 @@
                 width: 40vw;
                 height: 20vh;
                 background-color: aqua;
+            }
+
+            #commentContainer {
+                height: 90vh;
+                width: 25vw;
+                background-color: blueviolet;
             }
 
             .left {
@@ -126,6 +132,7 @@
         </div>
 
     </div>
+
 </body>
 
 </html>

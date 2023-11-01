@@ -3,8 +3,8 @@
 <link rel="stylesheet" href="/stylesheet.css">
 
 <head>
-    <style>
 
+    <style>
         label {
             text-align: left;
             font-size: 35px;
@@ -23,30 +23,43 @@
         }
     </style>
 
+    <title>Account Register</title>
+
     <div id="head">
 
         <h1 style="color: white; font-size: 80px;">FakeBook</h1>
 
     </div>
+
 </head>
 
 <body>
 
     <div id="container">
-        <form action="processlogin.php" method="post">
 
-            <label for="UserName">Username:</label>
-            <br>
-            <input type="text" id="UserName" name="UserName">
+        <form action="process-register.php" method="POST">
 
-            <br>
+            <input type="hidden" name="_token" value="{{csrf_token()}}">
 
-            <label for="UserPassword">User Password:</label>
-            <br>
-            <input type="text" id="UserPw" name="UserPw">
+            <label for="UserName">User Name:</label>
+
             <br>
 
-            <button>Login</button>
+            <input type="text" id="UserName" name="UserName" placeholder="Type your username here">
+
+            <br>
+
+            <label for="UserPw">Password:</label>
+
+            <br>
+
+            <input type="text" id="UserPw" name="UserPw" placeholder="Type your password here">
+
+            <br>
+
+            <button>Register</button>
+
+        </form>
 
     </div>
 
