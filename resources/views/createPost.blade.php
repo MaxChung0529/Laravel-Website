@@ -18,11 +18,23 @@
 
         <div id="upperContainer">
 
-            <form action="feed" method="get">
+            <form action="process-posts.php" method="POST">
 
                 <input type="file" accept="image/*" name="image" id="file">
 
                 <br><br>
+
+                <input type="text" id="user_id" name="user_id" placeholder="user id">
+
+                <br>
+
+                <input type="text" id="post_title" name="post_title" placeholder="post title">
+
+                <br>
+
+                <input type="text" id="img_path" name="img_path" placeholder="img path">
+
+                <br>
 
                 <label>Caption:</label>
 

@@ -11,7 +11,13 @@ class Users extends Model
     public $timestamps = false;
     
     protected $fillable = [
-        'UserName',
-        'UserPw',
+        'user_name',
+        'user_password',
     ];
+
+    
+    public function posts()
+    {
+        return $this->hasMany(Posts::class);    //Can create many posts
+    }
 }

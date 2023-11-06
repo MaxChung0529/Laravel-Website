@@ -17,13 +17,13 @@ class UsersController extends Controller
     public function register(Request $request)
     {
         $request->validate([
-            'UserName' => 'required | unique:users,UserName',
-            'UserPw' => 'required',
+            'user_name' => 'required | unique:users,user_name',
+            'user_password' => 'required',
         ]);
 
         $user = new Users();
-        $user->UserName = $request->input('UserName');
-        $user->UserPw = $request->input('UserPw');
+        $user->UserName = $request->input('user_name');
+        $user->UserPw = $request->input('user_password');
         $user->save();
 
         return redirect('/feed')->with('success','Login Successful');
@@ -32,8 +32,8 @@ class UsersController extends Controller
     public function login(Request $request)
     {
         $request->validate([
-            'UserName' => 'required',
-            'UserPw' => 'required',
+            'user_name' => 'required',
+            'user_password' => 'required',
         ]);
 
 

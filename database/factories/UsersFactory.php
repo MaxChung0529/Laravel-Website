@@ -19,8 +19,8 @@ class UsersFactory extends Factory
     {
         return [
             //
-            'UserName' => fake()->name(),
-            'UserPw' => fake()->password()
+            'user_name' => fake()->name(),
+            'user_password' => fake()->password()
         ];
     }
 }

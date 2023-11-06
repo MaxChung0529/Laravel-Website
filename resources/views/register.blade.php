@@ -41,19 +41,19 @@
 
             <input type="hidden" name="_token" value="{{csrf_token()}}">
 
-            <label for="UserName">User Name:</label>
+            <label for="user_name">User Name:</label>
 
             <br>
 
-            <input type="text" id="UserName" name="UserName" placeholder="Type your username here">
+            <input type="text" id="user_name" name="user_name" placeholder="Type your username here">
 
             <br>
 
-            <label for="UserPw">Password:</label>
+            <label for="user_password">Password:</label>
 
             <br>
 
-            <input type="text" id="UserPw" name="UserPw" placeholder="Type your password here">
+            <input type="text" id="user_password" name="user_password" placeholder="Type your password here">
 
             <br>
 
