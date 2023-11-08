@@ -109,8 +109,6 @@
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                box-sizing: border-box;
-                border: 1px dotted grey;
             }
 
             #createPostSplitter {
@@ -119,8 +117,6 @@
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                box-sizing: border-box;
-                border: 1px dotted grey;
             }
 
             #searchSplitter {
@@ -129,8 +125,6 @@
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                box-sizing: border-box;
-                border: 1px dotted grey;
             }
 
             #settingSplitter {
@@ -139,13 +133,11 @@
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                box-sizing: border-box;
-                border: 1px dotted grey;
             }
 
             .h1H:hover {
                 display: inline-block;
-                transform: scale(1.05);
+                transform: scale(1.01);
             }
 
             .left {
@@ -173,6 +165,16 @@
                 display: flex;
                 margin: auto;
             }
+
+            .button {
+                background-color: black;
+                color: white;
+                border: none;
+                font-size: 35px;
+                width: 200px;
+                height: 50px;
+                border-radius: 10px;
+            }
         }
     </style>
 
@@ -192,19 +194,25 @@
 
         <div id="menu">
             <div id="profileSplitter">
-                <a href="" style="text-decoration: none;"><h1>Profile</h1></a>
+                <a href="" style="text-decoration: none;">
+                    <button class="button">Profile</button>
+                </a>
             </div>
 
             <div id="createPostSplitter">
-            <a href="" style="text-decoration: none;"><h1>Create Post</h1></a>
+                <a href="" style="text-decoration: none;">
+                    <button class="button">Create Post</button>
+                </a>
             </div>
 
             <div id="searchSplitter">
-            <a href="" style="text-decoration: none;"><h1>Search</h1></a>
+                <a href="logout"><button class="button">Log Out</button>
             </div>
 
             <div id="settingSplitter">
-            <a href="" style="text-decoration: none;"><h1>Setting</h1></a>
+                <a href="" style="text-decoration: none;">
+                    <button class="button">Setting</button>
+                </a>
             </div>
         </div>
 
