@@ -11,10 +11,10 @@ class Users extends Model
     public $timestamps = false;
     
     protected $fillable = [
+        'email',
         'user_name',
-        'user_password',
+        'password',
     ];
-
     
     public function posts()
     {

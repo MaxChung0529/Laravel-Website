@@ -9,7 +9,7 @@ class Posts extends Model
 {
     use HasFactory;
     public $timestamps = false;
-    
+
     protected $fillable = [
         'user_id',
         'post_title',
@@ -19,6 +19,12 @@ class Posts extends Model
 
     public function user()
     {
-        return $this->belongsTo(Users::class);  //Can be created by one user only
+        return $this->belongsTo(Users::class); //Can be created by one user only
     }
+
+    public function comments()
+    {
+        return $this->hasMany(Comments::class);
+    }
+    
 }

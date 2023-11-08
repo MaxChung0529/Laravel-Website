@@ -38,6 +38,8 @@ Route::get('/register', function () {
 
 Route::post('/process-register.php', [UsersController::class, 'register']);
 
+Route::post('/process-login.php', [UsersController::class, 'authenticate']);
+
 Route::post('/process-posts.php', [PostsController::class, 'create']);
 
 

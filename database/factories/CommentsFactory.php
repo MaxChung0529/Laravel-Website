@@ -3,12 +3,11 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Faker\Generator as Faker;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Users>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Comments>
  */
-class UsersFactory extends Factory
+class CommentsFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -19,9 +18,9 @@ class UsersFactory extends Factory
     {
         return [
             //
-            'email' => fake()->safeEmail(),
-            'user_name' => fake()->name(),
-            'password' => fake()->password()
+            'comment' => fake()->sentences(3),
+            'users_id' => fake()->numberBetween(1,50),
+            'posts_id' => fake()->numberBetween(1,50)
         ];
     }
 }

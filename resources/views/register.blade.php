@@ -1,6 +1,4 @@
-<!DOCTYPE html>
-<html>
-<link rel="stylesheet" href="/stylesheet.css">
+<!DOCTYPE html> <html> <link rel="stylesheet" href="/stylesheet.css">
 
 <head>
 
@@ -41,7 +39,15 @@
 
             <input type="hidden" name="_token" value="{{csrf_token()}}">
 
-            <label for="user_name">User Name:</label>
+            <label for="email">Email:</label>
+
+            <br>
+
+            <input type="text" id="email" name="email" placeholder="Type your email here">
+
+            <br>
+
+            <label for="user_name">Username:</label>
 
             <br>
 
@@ -49,11 +55,11 @@
 
             <br>
 
-            <label for="user_password">Password:</label>
+            <label for="password">Password:</label>
 
             <br>
 
-            <input type="text" id="user_password" name="user_password" placeholder="Type your password here">
+            <input type="text" id="password" name="password" placeholder="Type your password here">
 
             <br>
 

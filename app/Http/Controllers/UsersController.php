@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Users;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
 {
@@ -17,26 +19,33 @@ class UsersController extends Controller
     public function register(Request $request)
     {
         $request->validate([
+            'email' => 'required | unique:users,email',
             'user_name' => 'required | unique:users,user_name',
-            'user_password' => 'required',
+            'password' => 'required',
         ]);
 
         $user = new Users();
-        $user->UserName = $request->input('user_name');
-        $user->UserPw = $request->input('user_password');
+        $user->email = $request->input('email');
+        $user->user_name = $request->input('user_name');
+        $user->password = Hash::make($request->input('password'));
         $user->save();
 
-        return redirect('/feed')->with('success','Login Successful');
+        return redirect('/login')->with('success', 'Account successfully created');
     }
 
-    public function login(Request $request)
+    public function authenticate(Request $request)
     {
-        $request->validate([
-            'user_name' => 'required',
-            'user_password' => 'required',
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
         ]);
 
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
 
-        return redirect('/feed')->with('success','Login Successful');
+            return redirect('/feed');
+        }
+
+        return redirect('/register');
     }
 }
