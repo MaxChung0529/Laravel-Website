@@ -11,7 +11,7 @@
 
         <div id="upperContainer">
 
-            <form action="process-post" method="POST" enctype="multipart/form-data">
+            <form action="process-post.php" method="POST" enctype="multipart/form-data">
 
                 <input type="hidden" name="_token" value="{{csrf_token()}}">
 

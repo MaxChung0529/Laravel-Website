@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Users;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Carbon\Carbon;
 
 class UsersController extends Controller
 {
@@ -27,6 +28,7 @@ class UsersController extends Controller
         $user->email = $request->input('email');
         $user->user_name = $request->input('user_name');
         $user->password = Hash::make($request->input('password'));
+        $user->setCreatedAt(Carbon::now());
         $user->save();
 
         return redirect('/login')->with('success', 'Account successfully created');

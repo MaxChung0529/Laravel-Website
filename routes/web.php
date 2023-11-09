@@ -42,10 +42,10 @@ Route::get('/createPost', function () {
 
 Route::get('logout', [LoginController::class,'logout']);
 
-Route::post('/process-register', [UsersController::class, 'register']);
+Route::post('/process-register.php', [UsersController::class, 'register']);
 
-Route::post('/process-login', [LoginController::class, 'authenticate']);
+Route::post('/process-login.php', [LoginController::class, 'authenticate']);
 
-Route::post('/process-post', [PostsController::class, 'create']);
+Route::post('/process-post.php', [PostsController::class, 'create']);
 
 require __DIR__ . '/auth.php';

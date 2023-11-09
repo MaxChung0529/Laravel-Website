@@ -39,7 +39,7 @@
 
     <div id="container">
 
-        <form action="process-login" method="POST">
+        <form action="process-login.php" method="POST">
 
             <input type="hidden" name="_token" value="{{csrf_token()}}">
 

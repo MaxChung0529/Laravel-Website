@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Posts;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class PostsController extends Controller
 {
@@ -32,6 +33,7 @@ class PostsController extends Controller
         }
 
         $post->img_path = '/public/images/' . $filename;
+        $post->setCreatedAt(Carbon::now());
         $post->save();
 
         return redirect('/feed')->with('success', 'Post creation successful');
