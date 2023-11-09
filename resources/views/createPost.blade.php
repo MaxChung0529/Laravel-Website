@@ -1,14 +1,7 @@
-<!DOCTYPE html>
-<html>
-<link rel="stylesheet" href="/stylesheet.css">
+<!DOCTYPE html> <html> <link rel="stylesheet" href="/stylesheet.css"> <head> <div id="head"> <h1 style="color: white;
+    font-size: 80px;">FakeBook</h1>
 
-<head>
-
-    <div id="head">
-
-        <h1 style="color: white; font-size: 80px;">FakeBook</h1>
-
-    </div>
+</div>
 
 </head>
 
@@ -18,13 +11,11 @@
 
         <div id="upperContainer">
 
-            <form action="process-posts.php" method="POST">
+            <form action="process-post" method="POST" enctype="multipart/form-data">
+
+                <input type="hidden" name="_token" value="{{csrf_token()}}">
 
                 <input type="file" accept="image/*" name="image" id="file">
-
-                <br><br>
-
-                <input type="text" id="user_id" name="user_id" placeholder="user id">
 
                 <br>
 
@@ -32,15 +23,11 @@
 
                 <br>
 
-                <input type="text" id="img_path" name="img_path" placeholder="img path">
-
-                <br>
-
                 <label>Caption:</label>
 
                 <br>
 
-                <textarea class="txtArea"></textarea>
+                <input type="text" name="caption" placeholder="Type your caption here">
 
                 <br>
 

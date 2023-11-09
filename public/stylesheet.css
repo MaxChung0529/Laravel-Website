@@ -41,6 +41,11 @@
     margin-right: 25%;
 }
 
+.h1H:hover {
+    display: inline-block;
+    transform: scale(1.01);
+}
+
 .button {
     background-color: black;
     color: white;

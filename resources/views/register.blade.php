@@ -1,33 +1,35 @@
-<!DOCTYPE html> <html> <link rel="stylesheet" href="/stylesheet.css">
+<!DOCTYPE html> <html> <link rel="stylesheet" href="/stylesheet.css"> <head>
 
-<head>
+<style>
+    label {
+        text-align: left;
+        font-size: 35px;
+        width: 100px
+    }
 
-    <style>
-        label {
-            text-align: left;
-            font-size: 35px;
-            width: 100px
-        }
+    input {
+        width: 500px;
+        height: 50px;
+    }
 
-        input {
-            width: 500px;
-            height: 50px;
-        }
+    button {
+        width: 100px;
+        font-size: 20px;
+        margin-top: 10px;
+    }
+</style>
 
-        button {
-            width: 100px;
-            font-size: 20px;
-            margin-top: 10px;
-        }
-    </style>
+<title>Account Register</title>
 
-    <title>Account Register</title>
+<div id="head">
 
-    <div id="head">
+    <a href="/index" style="color: black; text-decoration: none">
 
-        <h1 style="color: white; font-size: 80px;">FakeBook</h1>
+        <h1 class="h1H" style="color: white; font-size: 80px;">FakeBook</h1>
 
-    </div>
+    </a>
+
+</div>
 
 </head>
 
@@ -35,7 +37,7 @@
 
     <div id="container">
 
-        <form action="process-register.php" method="POST">
+        <form action="/process-register" method="POST">
 
             <input type="hidden" name="_token" value="{{csrf_token()}}">
 

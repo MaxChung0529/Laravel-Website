@@ -3,11 +3,8 @@
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\PostsController;
-use App\Http\Middleware\Authenticate;
-use App\Models\Users;
-use Database\Seeders\UsersTableseeder;
+use App\Http\Controllers\ImageController;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,13 +40,12 @@ Route::get('/createPost', function () {
     return view('createPost');
 })->middleware('auth');
 
-
-Route::post('/process-register.php', [UsersController::class, 'register']);
-
-Route::post('/process-login.php', [LoginController::class, 'authenticate']);
-
 Route::get('logout', [LoginController::class,'logout']);
 
-Route::post('/process-posts.php', [PostsController::class, 'create']);
+Route::post('/process-register', [UsersController::class, 'register']);
+
+Route::post('/process-login', [LoginController::class, 'authenticate']);
+
+Route::post('/process-post', [PostsController::class, 'create']);
 
 require __DIR__ . '/auth.php';

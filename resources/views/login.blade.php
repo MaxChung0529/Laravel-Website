@@ -1,6 +1,4 @@
-<!DOCTYPE html>
-<html>
-<link rel="stylesheet" href="/stylesheet.css">
+<!DOCTYPE html> <html> <link rel="stylesheet" href="/stylesheet.css">
 
 <head>
 
@@ -27,7 +25,11 @@
 
     <div id="head">
 
-        <h1 style="color: white; font-size: 80px;">FakeBook</h1>
+        <a href="/index" style="color: black; text-decoration: none">
+
+            <h1 class="h1H" style="color: white; font-size: 80px;">FakeBook</h1>
+
+        </a>
 
     </div>
 
@@ -37,7 +39,7 @@
 
     <div id="container">
 
-        <form action="process-login.php" method="POST">
+        <form action="process-login" method="POST">
 
             <input type="hidden" name="_token" value="{{csrf_token()}}">
 
@@ -60,7 +62,7 @@
             <button>Login</button>
 
         </form>
-        
+
     </div>
 
 </body>

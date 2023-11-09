@@ -4,18 +4,36 @@ namespace App\Http\Controllers;
 
 use App\Models\Posts;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PostsController extends Controller
 {
     //
-    public function create(Request $request) {
+    public function create(Request $request)
+    {
+
+        $request->validate([
+            "post_title" => ['required'],
+            'caption' => ['nullable'],
+            'image' => ['nullable', 'mimes:jpg,jpeg,png', 'max:2048'],
+        ]);
+
+        $user_id = Auth::id();
 
         $post = new Posts();
-        $post->userID = $request->input('user_id');
-        $post->postTitle = $request->input('post_title');
-        $post->path = $request->input('img_path');
+        $post->post_title = $request->input('post_title');
+        $post->caption = $request->input('caption');
+        $post->users_id = $user_id;
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $filename = $image->getClientOriginalName();
+            $image->move('images',$filename);
+        }
+
+        $post->img_path = '/public/images/' . $filename;
         $post->save();
-        
-        return redirect('/feed')->with('success','Post creation successful');
+
+        return redirect('/feed')->with('success', 'Post creation successful');
     }
 }

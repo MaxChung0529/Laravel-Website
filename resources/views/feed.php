@@ -200,7 +200,7 @@
             </div>
 
             <div id="createPostSplitter">
-                <a href="" style="text-decoration: none;">
+                <a href="/createPost" style="text-decoration: none;">
                     <button class="button">Create Post</button>
                 </a>
             </div>

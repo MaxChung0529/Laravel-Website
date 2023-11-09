@@ -11,10 +11,8 @@ class Posts extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'user_id',
         'post_title',
         'caption',
-        'img_path',
     ];
 
     public function user()
