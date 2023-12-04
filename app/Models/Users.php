@@ -13,10 +13,16 @@ class Users extends Model
         'email',
         'user_name',
         'password',
+        'avatar',
     ];
     
     public function posts()
     {
         return $this->hasMany(Posts::class);    //Can create many posts
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comments::class);
     }
 }

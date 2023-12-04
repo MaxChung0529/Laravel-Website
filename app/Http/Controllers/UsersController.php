@@ -29,6 +29,15 @@ class UsersController extends Controller
         $user->user_name = $request->input('user_name');
         $user->password = Hash::make($request->input('password'));
         $user->setCreatedAt(Carbon::now());
+
+
+        if ($request->hasfile('avatar')) {
+            $image = $request->file('avatar');
+            $filename = $image->getClientOriginalName();
+            $image->move('pic', $filename);
+            $user->avatar = 'pic/' . $filename;
+        }
+
         $user->save();
 
         return redirect('/login')->with('success', 'Account successfully created');

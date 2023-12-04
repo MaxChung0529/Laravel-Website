@@ -32,10 +32,6 @@ Route::get('/register', function () {
     return view('register');
 });
 
-Route::get('/feed', function () {
-    return view('feed');
-})->middleware('auth');
-
 Route::get('/createPost', function () {
     return view('createPost');
 })->middleware('auth');
@@ -47,5 +43,9 @@ Route::post('/process-register.php', [UsersController::class, 'register']);
 Route::post('/process-login.php', [LoginController::class, 'authenticate']);
 
 Route::post('/process-post.php', [PostsController::class, 'create']);
+
+Route::post('/process-comment.php', [PostsController::class, 'addComment']);
+
+Route::get('feed',[PostsController::class, 'getPosts'])->middleware('auth');
 
 require __DIR__ . '/auth.php';

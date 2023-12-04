@@ -1,7 +1,13 @@
-<!DOCTYPE html> <html> <link rel="stylesheet" href="/stylesheet.css"> <head> <div id="head"> <h1 style="color: white;
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="/stylesheet.css">
+
+<head>
+    <div id="head">
+        <h1 style="color: white;
     font-size: 80px;">FakeBook</h1>
 
-</div>
+    </div>
 
 </head>
 
@@ -16,6 +22,10 @@
                 <input type="hidden" name="_token" value="{{csrf_token()}}">
 
                 <input type="file" accept="image/*" name="image" id="file">
+
+                <br>
+                
+                <label>Title:</label>
 
                 <br>
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comments;
 use App\Models\Posts;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,7 +17,7 @@ class PostsController extends Controller
         $request->validate([
             "post_title" => ['required'],
             'caption' => ['nullable'],
-            'image' => ['nullable', 'mimes:jpg,jpeg,png', 'max:2048'],
+            'image' => ['nullable', 'mimes:jpg,jpeg,png'],
         ]);
 
         $user_id = Auth::id();
@@ -32,10 +33,39 @@ class PostsController extends Controller
             $image->move('images',$filename);
         }
 
-        $post->img_path = '/public/images/' . $filename;
+        $post->image = 'images/' . $filename;
         $post->setCreatedAt(Carbon::now());
         $post->save();
 
         return redirect('/feed')->with('success', 'Post creation successful');
+    }
+
+    public function getPosts(Request $request)
+    {
+        $posts = Posts::all();
+        return view('feed', ['posts' => $posts]);
+    }
+
+    public function addComment(Request $request)
+    {
+        $request->validate([
+            "comment" => ['required'],
+        ]);
+
+        $user_id = Auth::id();
+
+        $comment = new Comments();
+        $comment->comment = $request->input('comment');
+        $comment->users_id = $user_id;
+        $comment->posts_id = $request->input('posts_id');
+
+        $comment->save();
+        return redirect('/feed')->with('success', 'Post creation successful');
+    }
+
+    public function getComments(Request $request)
+    {
+        $comments = Comments::all();
+        return view('feed', ['comments' => $comments]);
     }
 }

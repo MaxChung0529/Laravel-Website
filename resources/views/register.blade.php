@@ -1,35 +1,39 @@
-<!DOCTYPE html> <html> <link rel="stylesheet" href="/stylesheet.css"> <head>
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="/stylesheet.css">
 
-<style>
-    label {
-        text-align: left;
-        font-size: 35px;
-        width: 100px
-    }
+<head>
 
-    input {
-        width: 500px;
-        height: 50px;
-    }
+    <style>
+        label {
+            text-align: left;
+            font-size: 35px;
+            width: 100px
+        }
 
-    button {
-        width: 100px;
-        font-size: 20px;
-        margin-top: 10px;
-    }
-</style>
+        input {
+            width: 500px;
+            height: 50px;
+        }
 
-<title>Account Register</title>
+        button {
+            width: 100px;
+            font-size: 20px;
+            margin-top: 10px;
+        }
+    </style>
 
-<div id="head">
+    <title>Account Register</title>
 
-    <a href="/index" style="color: black; text-decoration: none">
+    <div id="head">
 
-        <h1 class="h1H" style="color: white; font-size: 80px;">FakeBook</h1>
+        <a href="/index" style="color: black; text-decoration: none">
 
-    </a>
+            <h1 class="h1H" style="color: white; font-size: 80px;">FakeBook</h1>
 
-</div>
+        </a>
+
+    </div>
 
 </head>
 
@@ -37,9 +41,17 @@
 
     <div id="container">
 
-        <form action="process-register.php" method="POST">
+        <form action="process-register.php" method="POST" enctype="multipart/form-data">
 
             <input type="hidden" name="_token" value="{{csrf_token()}}">
+
+            <label for="avatar">Avatar picture</label>
+
+            <br>
+
+            <input type="file" accept="image/*" name="avatar" id="file">
+
+            <br>
 
             <label for="email">Email:</label>
 
