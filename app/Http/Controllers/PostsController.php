@@ -37,7 +37,7 @@ class PostsController extends Controller
         $post->setCreatedAt(Carbon::now());
         $post->save();
 
-        return redirect('/feed')->with('success', 'Post creation successful');
+        return redirect('/feed');
     }
 
     public function getPosts(Request $request)

@@ -1,4 +1,6 @@
-<!DOCTYPE html> <html> <link rel="stylesheet" href="/stylesheet.css">
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="/stylesheet.css">
 
 <head>
 
@@ -46,16 +48,28 @@
             <label for="email">Email:</label>
 
             <br>
+            @if ($errors->has('email'))
+            <span class="invalid-feedback">
+                <strong>{{ $errors->first('email') }}</strong>
+            </span>
+            @endif
+            <br>
 
-            <input type="text" name="email" placeholder="Type your email here">
+            <input type="text" id="email" name="email" placeholder="Type your email here">
 
             <br>
 
             <label for="password">Password:</label>
 
             <br>
+            @if ($errors->has('password'))
+            <span class="invalid-feedback">
+                <strong>{{ $errors->first('password') }}</strong>
+            </span>
+            @endif
+            <br>
 
-            <input type="text" name="password" placeholder="Type your password here">
+            <input type="text" id="password" name="password" placeholder="Type your password here">
 
             <br>
 

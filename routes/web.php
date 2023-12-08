@@ -48,4 +48,9 @@ Route::post('/process-comment.php', [PostsController::class, 'addComment']);
 
 Route::get('feed',[PostsController::class, 'getPosts'])->middleware('auth');
 
+Route::post('update-profile.php',[UsersController::class, 'update']);
+
+Route::get('/{id}', [UsersController::class, 'getDetail'])->name('user.view');
+
+
 require __DIR__ . '/auth.php';

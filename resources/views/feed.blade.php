@@ -155,7 +155,7 @@
                 justify-content: center;
             }
 
-            #searchSplitter {
+            #logoutSplitter {
                 height: 22.5vh;
                 width: 25vw;
                 display: flex;
@@ -196,9 +196,7 @@
 
             .img {
                 height: auto;
-                width: auto;
-                max-height: 56vh;
-                max-width: 24vw;
+                width: 35vw;
                 display: flex;
                 margin: auto;
             }
@@ -304,9 +302,9 @@
             #exit_profile {
                 width: 30px;
                 height: 30px;
-                position:absolute;
-                top:8px;
-                right:16px;
+                position: absolute;
+                top: 8px;
+                right: 16px;
                 cursor: pointer;
             }
 
@@ -314,21 +312,32 @@
                 display: flex;
                 flex-direction: row;
                 display: flex;
-                justify-content: center;
                 align-items: center;
                 text-align: center;
                 margin-top: 2vh;
             }
 
+            .profile-page-row h2 {
+                margin-left: 2vw;
+                margin-right: 2vw;
+            }
+
             .profile-page-titles {
                 margin-left: 25px;
+                margin-right: 10vw;
             }
 
             .profile-page-avatar {
                 width: 150px;
                 height: 150px;
                 border-radius: 50%;
-                margin-left: 10vw;
+                margin-right: 1vw;
+            }
+
+            .profile-input-box {
+                background-color: #c9c9c9;
+                height: 30px;
+                width: 200px;
             }
         }
     </style>
@@ -351,14 +360,45 @@
                 <div onclick="hideProfile()">
                     <img id="exit_profile" src="pic/exit.png">
                 </div>
-                <div class="profile-page-row">
-                    <h3 class="profile-page-titles">Profile picture:</h3>
-                    <img class="profile-page-avatar" src="{{App\Models\Users::find(Auth::id())->avatar}}">
-                </div>
+                <form action="update-profile.php" method="POST" enctype="multipart/form-data">
+
+                    <input type="hidden" name="_token" value="{{csrf_token()}}">
+
+                    <div class="profile-page-row">
+                        <h3 class="profile-page-titles">Profile picture:</h3>
+                        <img class="profile-page-avatar" src="{{App\Models\Users::find(Auth::id())->avatar}}">
+
+                        <br>
+
+                        <input type="file" accept="image/*" name="new-avatar" id="file" placeholder="Choose new avatar">
+                    </div>
+
+                    <br>
+
+                    <br>
+
+                    <div class="profile-page-row">
+                        <h3 class="profile-page-titles">Profile name:</h3>
+                        <h2>{{App\Models\Users::find(Auth::id())->user_name}}</h2>
+                        <input type="text" name="new-userName" class="profile-input-box" placeholder="New Username">
+                    </div>
+
+                    <br><br>
+
+                    <button class="button">Update</button>
+
+                </form>
             </div>
         </div>
 
         <div id="menu">
+
+            <div id="settingSplitter">
+                <a href="" style="text-decoration: none;">
+                    <button class="button">Feed</button>
+                </a>
+            </div>
+
             <div id="profileSplitter" onclick="showProfile()">
                 <button class="button">Profile</button>
             </div>
@@ -369,14 +409,8 @@
                 </a>
             </div>
 
-            <div id="searchSplitter">
-                <a href="logout"><button class="button">Log Out</button>
-            </div>
-
-            <div id="settingSplitter">
-                <a href="" style="text-decoration: none;">
-                    <button class="button">Setting</button>
-                </a>
+            <div id="logoutSplitter">
+                <a href="logout"><button class="button">Log Out</button></a>
             </div>
         </div>
         <div id="feedContainer">
@@ -391,8 +425,10 @@
 
                         <div id="userNameContainer">
 
-                            <a href="user profile" id="name"
-                                style="color: black; text-decoration: none"><b>{{App\Models\Users::find($post->users_id)->user_name}}</b></a>
+                            <a href="{{ route('user.view', ['id' => $post->users_id]) }}" id="name"
+                                style="color: black; text-decoration: none">
+                                <b>{{App\Models\Users::find($post->users_id)->user_name}}</b>
+                            </a>
 
                         </div>
 
@@ -480,7 +516,7 @@
                 element.style.visibility = "visible";
             else
                 element.style.visibility = "hidden";
-    }
+        }
 
     </script>
 </body>

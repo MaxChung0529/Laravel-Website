@@ -56,6 +56,12 @@
             <label for="email">Email:</label>
 
             <br>
+            @if ($errors->has('password'))
+            <span class="invalid-feedback">
+                <strong>{{ $errors->first('email') }}</strong>
+            </span>
+            @endif
+            <br>
 
             <input type="text" id="email" name="email" placeholder="Type your email here">
 
@@ -64,6 +70,12 @@
             <label for="user_name">Username:</label>
 
             <br>
+            @if ($errors->has('user_name'))
+            <span class="invalid-feedback">
+                <strong>{{ $errors->first('user_name') }}</strong>
+            </span>
+            @endif
+            <br>
 
             <input type="text" id="user_name" name="user_name" placeholder="Type your username here">
 
@@ -71,6 +83,12 @@
 
             <label for="password">Password:</label>
 
+            <br>
+            @if ($errors->has('password'))
+            <span class="invalid-feedback">
+                <strong>{{ $errors->first('password') }}</strong>
+            </span>
+            @endif
             <br>
 
             <input type="text" id="password" name="password" placeholder="Type your password here">
