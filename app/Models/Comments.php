@@ -22,4 +22,8 @@ class Comments extends Model
     public function user() {
         return $this->belongsTo(Users::class);
     }
+
+    public function notifications() {
+        return $this->hasMany(Notification::class);
+    }
 }

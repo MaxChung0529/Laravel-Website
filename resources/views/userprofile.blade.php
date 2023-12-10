@@ -487,6 +487,31 @@
 
             </div>
             @endforeach
+            @foreach ($user->comments()->get() as $comment)
+            <div id="sectionContainer">
+                <div class="profileComment">
+
+                    <div id="profileContainer">
+
+                        <img src="{{$user->avatar}}" class="profilePic">
+
+                        <div id="userNameContainer">
+
+                            <a href="{{ route('user.view', ['id' => $post->users_id]) }}" id="name"
+                                style="color: black; text-decoration: none">
+                                <b>{{App\Models\Users::find($post->users_id)->user_name}}</b>
+                            </a>
+
+                        </div>
+
+                    </div>
+                    <p>POST ID: {{$comment->posts_id}}</p>
+                    <br>
+                    <i>COMMENT: "{{$comment->comment}}"</i>
+                </div>
+
+            </div>
+            @endforeach
         </div>
 
     </div>
@@ -516,7 +541,7 @@
                 element.style.visibility = "visible";
             else
                 element.style.visibility = "hidden";
-        }
+            }
 
     </script>
 </body>

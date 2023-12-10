@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comments;
+use App\Models\Notification;
 use App\Models\Posts;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -30,7 +31,7 @@ class PostsController extends Controller
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $filename = $image->getClientOriginalName();
-            $image->move('images',$filename);
+            $image->move('images', $filename);
         }
 
         $post->image = 'images/' . $filename;
@@ -60,7 +61,32 @@ class PostsController extends Controller
         $comment->posts_id = $request->input('posts_id');
 
         $comment->save();
-        return redirect('/feed')->with('success', 'Post creation successful');
+
+        if ($user_id !== (Posts::find($comment->posts_id)->users_id)) {
+            $notification_controller = new NotificationController;
+            $notification_controller->addNotification($comment->id);
+        }
+
+        return view('feed');
+    }
+
+    public function editComment(Request $request)
+    {
+        $request->validate([
+            "newComment" => ['required'],
+        ]);
+
+        $comment_id = $request->input('comment_id');
+
+        $comment = Comments::findOrFail($comment_id);
+
+        if ($comment) {
+
+            //$comment->comment = $request->input('newComment');
+            $comment->comment = 'edited';
+
+        }
+        $comment->save();
     }
 
     public function getComments(Request $request)

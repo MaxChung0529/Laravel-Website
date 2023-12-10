@@ -3,10 +3,13 @@
 <link rel="stylesheet" href="/stylesheet.css">
 
 <head>
-    <div id="head">
-        <h1 style="color: white;
-    font-size: 80px;">FakeBook</h1>
 
+    <div id="head">
+        <a href="/index" style="color: black; text-decoration: none">
+
+            <h1 class="h1H" style="color: white; font-size: 80px;">FakeBook</h1>
+
+        </a>
     </div>
 
 </head>
@@ -24,7 +27,7 @@
                 <input type="file" accept="image/*" name="image" id="file">
 
                 <br>
-                
+
                 <label>Title:</label>
 
                 <br>

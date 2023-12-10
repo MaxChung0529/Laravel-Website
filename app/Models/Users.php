@@ -25,4 +25,8 @@ class Users extends Model
     {
         return $this->hasMany(Comments::class);
     }
+
+    public function notifications() {
+        return $this->hasMany(Notification::class);
+    }
 }
