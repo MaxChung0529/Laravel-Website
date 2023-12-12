@@ -138,7 +138,8 @@
                     <div class="actions">
                         <a href="{{ route('post.edit', ['id' => $post->id]) }}"><button class="edit">Edit
                                 Post</button></a>
-                        <a href="{{ route('post.destroy', ['id' => $post->id]) }}"><button class="edit">Delete
+                        <a href="{{ route('post.destroy', ['id' => $post->id]) }}"><button class="edit"
+                                id="delete-post">Delete
                                 Post</button></a>
                     </div>
                     @endif
@@ -157,13 +158,14 @@
                             <img class="comment-avatar" src="{{App\Models\Users::find($comment->users_id)->avatar}}">
                             {{App\Models\Users::find($comment->users_id)->user_name}}
                         </div>
-                        <div id="comment">{{$comment->comment}}</div>
+                        <div class="comment">{{$comment->comment}}</div>
 
                         @if (Auth::user()->id == $comment->users_id)
                         <div class="actions">
                             <button class="edit" onclick="showEditComment('{{$comment->id}}')">Edit
                                 Comment</button>
-                            <a href="{{ route('comment.destroy', ['id' => $comment->id]) }}"><button class="edit">Delete
+                            <a href="{{ route('comment.destroy', ['id' => $comment->id]) }}"><button class="edit"
+                                    id="delete-comment">Delete
                                     Comment</button></a>
                         </div>
                         @endif
@@ -200,7 +202,8 @@
                     <div class="actions">
                         <a href="{{ route('post.edit', ['id' => $post->id]) }}"><button class="edit">Edit
                                 Post</button></a>
-                        <a href="{{ route('post.destroy', ['id' => $post->id]) }}"><button class="edit">Delete
+                        <a href="{{ route('post.destroy', ['id' => $post->id]) }}"><button class="edit"
+                                id="delete-post" onclick="return confirm('Are you sure you want to delete this post?')">Delete
                                 Post</button></a>
                     </div>
                     @endif
@@ -219,13 +222,14 @@
                             <img class="comment-avatar" src="{{App\Models\Users::find($comment->users_id)->avatar}}">
                             {{App\Models\Users::find($comment->users_id)->user_name}}
                         </div>
-                        <div id="comment">{{$comment->comment}}</div>
+                        <div class="comment">{{$comment->comment}}</div>
 
                         @if (Auth::user()->id == $comment->users_id)
                         <div class="actions">
                             <button class="edit" onclick="showEditComment('{{$comment->id}}')">Edit
                                 Comment</button>
-                            <a href="{{ route('comment.destroy', ['id' => $comment->id]) }}"><button class="edit">Delete
+                            <a href="{{ route('comment.destroy', ['id' => $comment->id]) }}"><button class="edit"
+                                    id="delete-comment" onclick="return confirm('Are you sure you want to delete this comment?')">Delete
                                     Comment</button></a>
                         </div>
                         @endif
@@ -248,13 +252,14 @@
 
                             <h3>Comment:</h3>
 
-                            <input class="txtBox" type="text" id="txtBox" name="comment"
+                            <input class="txtBox" type="text" id="comment" name="comment"
                                 placeholder="Type your comment here">
                             <br><br>
                             <input type="hidden" id="posts_id" name="posts_id" value="">
                             <br>
 
-                            <button id="small-button-submit" onclick="hideCommentBox()">Post Comment</button>
+                            <button id="return" class="submitButtons" onclick="hideCommentBox()">Return</button>
+                            <button id="comment-submit" class="submitButtons">Post Comment</button>
                         </form>
                     </div>
                 </div>
@@ -277,7 +282,8 @@
                             <input type="hidden" id="comment_id" name="comment_id" value="">
                             <br>
 
-                            <button id="small-button" onclick="hideEditComment()">Post Comment</button>
+                            <button id="return" class="submitButtons" onclick="hideEditComment()">Return</button>
+                            <button id="edit-comment-submit" class="submitButtons">Update Comment</button>
                         </form>
                     </div>
                 </div>
@@ -318,14 +324,27 @@
             });
         });
 
-        selectImage.onchange = evt => {
-            var preview = document.getElementById('preview-avatar');
-            preview.style.display = 'block';
-            const [file] = selectImage.files;
-            if (file) {
-                preview.src = file.getClientOriginalName;
+        $("#comment-submit").click(function () {
+            var comment = $("#comment").val();
+
+            if (comment == "") {
+                alert("Comment cannot be empty!!!");
+                return false;
+            } else {
+                hideCommentBox();
             }
-        }
+        });
+
+        $("#edit-comment-submit").click(function () {
+            var comment = $("#newComment").val();
+
+            if (comment == "") {
+                alert("Comment cannot be empty!!!");
+                return false;
+            } else {
+                hideEditComment();
+            }
+        });
 
         function showCommentBox(x) {
             document.getElementById("make-comment-popup-bg").style.visibility = "visible";

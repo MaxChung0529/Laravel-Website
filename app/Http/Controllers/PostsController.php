@@ -17,7 +17,7 @@ class PostsController extends Controller
 
         $request->validate([
             "post_title" => ['nullable'],
-            'caption' => ['nullable'],
+            'captionBox' => ['nullable'],
             'image' => ['nullable', 'mimes:jpg,jpeg,png'],
         ]);
 
@@ -25,7 +25,7 @@ class PostsController extends Controller
 
         $post = new Posts();
         $post->post_title = $request->input('post_title');
-        $post->caption = $request->input('caption');
+        $post->caption = $request->input('captionBox');
         $post->users_id = $user_id;
 
         if ($request->hasFile('image')) {
@@ -77,11 +77,15 @@ class PostsController extends Controller
             $notification_controller->addNotification($comment->id);
         }
 
-        return view('feed');
+        return redirect()->back();
     }
 
     public function editComment(Request $request)
     {
+
+        $request->validate([
+            "newComment" => ['required'],
+        ]);
 
         $comment_id = $request->input('comment_id');
 

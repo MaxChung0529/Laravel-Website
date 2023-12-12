@@ -40,7 +40,7 @@
 
                 <br>
 
-                <textArea type="text" id="captionBox" placeholder="Type your caption here"></textArea>
+                <textArea type="text" id="captionBox" name="captionBox" placeholder="Type your caption here"></textArea>
 
                 <br>
 
