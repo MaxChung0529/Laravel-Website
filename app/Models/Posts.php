@@ -16,6 +16,10 @@ class Posts extends Model
         'user_id',
         'image'
     ];
+    
+    protected $attributes = [
+        'image' => '',
+    ];
 
     public function user()
     {

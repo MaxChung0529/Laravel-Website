@@ -24,7 +24,7 @@
 
                 <input type="hidden" name="_token" value="{{csrf_token()}}">
 
-                <input type="file" accept="image/*" name="image" id="file">
+                <input type="file" accept="image/*" name="image" id="image">
 
                 <br>
 
@@ -32,7 +32,7 @@
 
                 <br>
 
-                <input type="text" id="post_title" name="post_title" placeholder="post title">
+                <input type="text" id="title" name="post_title" placeholder="post title">
 
                 <br>
 
@@ -40,7 +40,7 @@
 
                 <br>
 
-                <input type="text" name="caption" placeholder="Type your caption here">
+                <textArea type="text" id="captionBox" placeholder="Type your caption here"></textArea>
 
                 <br>
 

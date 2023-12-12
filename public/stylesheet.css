@@ -41,6 +41,16 @@
     margin-right: 25%;
 }
 
+#title {
+    height: 3vh;
+    width: 15vw;
+}
+
+#captionBox {
+    height: 10vh;
+    width: 15vw;
+}
+
 .h1H:hover {
     display: inline-block;
     transform: scale(1.01);

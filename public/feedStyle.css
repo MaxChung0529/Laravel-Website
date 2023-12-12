@@ -28,7 +28,8 @@
 }
 
 #sectionContainer {
-    height: 90vh;
+    height: auto;
+    max-height: 90vh;
     width: 75vw;
     display: flex;
     flex-direction: row;
@@ -44,8 +45,8 @@
     overflow-y: scroll;
 }
 
-#postContainer {
-    height: 90vh;
+#postContainerWithImage {
+    height: auto;
     width: 50vw;
     display: flex;
     align-items: center;
@@ -54,6 +55,42 @@
     border-style: solid;
     border-width: 3px;
 
+}
+
+#postContainerWithoutImage {
+    height: auto;
+    width: 50vw;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: whitesmoke;
+    border-style: solid;
+    border-width: 3px;
+
+}
+
+#commentContainerWithoutImage {
+    height: 45vh;
+    width: 25vw;
+    text-align: center;
+    background-color: white;
+    box-sizing: border-box;
+    border: 1px solid grey;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+#profileContainerWithoutImage {
+    width: 50vw;
+    height: 7vh;
+    flex-direction: row;
+    display: flex;
+    border-bottom: #2f2f2f;
+    border-style: solid;
+    border-width: 2px;
+    margin-bottom: 5vh;
 }
 
 #profileContainer {
@@ -107,6 +144,7 @@
     font-size: 20px;
     padding-top: 2vh;
     padding-left: 2.6vw;
+    white-space: pre-line;
 }
 
 #commentContainer {
@@ -141,6 +179,7 @@
 #comment {
     width: 25vw;
     height: auto;
+    white-space: pre-line;
 }
 
 #menu {
@@ -235,6 +274,15 @@
     margin-left: 2vw;
 }
 
+.actions {
+    display: flex;
+    flex-direction: row;
+}
+
+.actions button{
+    margin-right: 1vw;
+}
+
 .h1H:hover {
     display: inline-block;
     transform: scale(1.01);
@@ -260,7 +308,9 @@
 
 .img {
     height: auto;
-    width: 100%;
+    max-height: 63vh;
+    width: fit-content;
+    max-width: 100%;
     display: flex;
     margin: auto;
 }
@@ -349,6 +399,17 @@
     flex-direction: column;
 }
 
+#edit-post-container {
+    width: 50vw;
+    height: 90vh;
+    background-color: white;
+    border-radius: 25px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
 #exit_profile {
     width: 30px;
     height: 30px;
@@ -359,6 +420,15 @@
 }
 
 .profile-page-row {
+    display: flex;
+    flex-direction: row;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin-top: 2vh;
+}
+
+.edit-post-row {
     display: flex;
     flex-direction: row;
     display: flex;
@@ -389,4 +459,8 @@
     height: 30px;
     width: 200px;
     margin-left: 10vw;
+}
+
+.w-5{
+    display: none;
 }

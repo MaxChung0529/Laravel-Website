@@ -16,7 +16,7 @@ class PostsController extends Controller
     {
 
         $request->validate([
-            "post_title" => ['required'],
+            "post_title" => ['nullable'],
             'caption' => ['nullable'],
             'image' => ['nullable', 'mimes:jpg,jpeg,png'],
         ]);
@@ -32,9 +32,9 @@ class PostsController extends Controller
             $image = $request->file('image');
             $filename = $image->getClientOriginalName();
             $image->move('images', $filename);
+            $post->image = 'images/' . $filename;
         }
 
-        $post->image = 'images/' . $filename;
         $post->setCreatedAt(Carbon::now());
         $post->save();
 
@@ -43,8 +43,18 @@ class PostsController extends Controller
 
     public function getPosts(Request $request)
     {
-        $posts = Posts::all();
+        $posts = Posts::paginate(5);
         return view('feed', ['posts' => $posts]);
+    }
+
+    public function editPosts(Request $request)
+    {
+    }
+
+    public function deletePosts($id)
+    {
+        Posts::where('id',$id)->delete();
+        return redirect('/feed');
     }
 
     public function addComment(Request $request)
@@ -72,26 +82,29 @@ class PostsController extends Controller
 
     public function editComment(Request $request)
     {
-        $request->validate([
-            "newComment" => ['required'],
-        ]);
 
         $comment_id = $request->input('comment_id');
 
-        $comment = Comments::findOrFail($comment_id);
+        $comment = Comments::find($comment_id);
 
         if ($comment) {
 
-            //$comment->comment = $request->input('newComment');
-            $comment->comment = 'edited';
+            $comment->comment = $request->input('newComment');
 
         }
         $comment->save();
+        return redirect('feed');
     }
 
     public function getComments(Request $request)
     {
         $comments = Comments::all();
         return view('feed', ['comments' => $comments]);
+    }
+
+    public function deleteComments($id)
+    {
+        Comments::where('id',$id)->delete();
+        return redirect('/feed');
     }
 }
