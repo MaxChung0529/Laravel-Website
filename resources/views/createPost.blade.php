@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 <link rel="stylesheet" href="/stylesheet.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
 <head>
 
@@ -20,7 +22,7 @@
 
         <div id="upperContainer">
 
-            <form action="process-post.php" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('post.create') }}" method="POST" enctype="multipart/form-data">
 
                 <input type="hidden" name="_token" value="{{csrf_token()}}">
 
@@ -32,7 +34,7 @@
 
                 <br>
 
-                <input type="text" id="title" name="post_title" placeholder="post title">
+                <input type="text" id="post_title" name="post_title" placeholder="Post title">
 
                 <br>
 
@@ -44,13 +46,31 @@
 
                 <br>
 
-                <button class="button">Post</button>
+                <button class="button" id="create-post-submit">Post</button>
 
             </form>
 
         </div>
 
     </div>
+
+    <script>
+        $("#create-post-submit").click(function () {
+            var comment = $("#captionBox").val();
+            var title = $("#post_title").val();
+
+            if (comment == "" && title == "") {
+                alert("What exactly do you want to do???")
+                return false;
+            } else if (comment == "") {
+                alert("Caption cannot be empty!!!");
+                return false;
+            } else if (title == "") {
+                alert("Title cannot be empty!!!")
+                return false;
+            }
+        });
+    </script>
 
 </body>
 

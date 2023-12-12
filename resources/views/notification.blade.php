@@ -53,14 +53,17 @@
 
         <div id="menu">
 
+            <div id="profileSplitter" class="menuButtons">
+                <button onclick="showProfile()" class="menuButtons">
+                    <img src="{{Auth::user()->avatar}}" id="profileAvatar">
+                    <p>{{Auth::user()->user_name}}</p>
+                </button>
+            </div>
+
             <div id="feedSplitter" class="menuButtons">
                 <a href="/feed" style="text-decoration: none;">
                     <button class="button">Feed</button>
                 </a>
-            </div>
-
-            <div id="profileSplitter" class="menuButtons">
-                <button class="button" onclick="showProfile()">Profile</button>
             </div>
 
             <div id="notificationSplitter" class="menuButtons">
@@ -91,14 +94,15 @@
                     <div class="notificationName">{{App\Models\Users::find($notification->from_id)->user_name}}</div>
                 </a>
                 <p>commented on your post</p>
-
-
                 <p class="notificationPostTitle">
                     &#60;&#60;{{App\Models\Posts::find(App\Models\Comments::find($notification->comments_id)->posts_id)->post_title}}&#62;&#62;
                 </p>
 
+
+                @if (App\Models\Posts::find(App\Models\Comments::find($notification->comments_id)->posts_id)->image != '')
                 <img class="miniThumbnail"
                     src="{{App\Models\Posts::find(App\Models\Comments::find($notification->comments_id)->posts_id)->image}}">
+                @endif
             </div>
 
             @endforeach

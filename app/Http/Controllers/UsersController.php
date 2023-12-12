@@ -31,6 +31,7 @@ class UsersController extends Controller
         $user->user_name = $request->input('user_name');
         $user->password = Hash::make($request->input('password'));
         $user->setCreatedAt(Carbon::now());
+        $user->avatar = 'pic/default_avatar.png';
 
 
         if ($request->hasfile('avatar')) {
@@ -39,6 +40,8 @@ class UsersController extends Controller
             $image->move('pic', $filename);
             $user->avatar = 'pic/' . $filename;
         }
+
+        $user->role = 'Users';
 
         $user->save();
 
@@ -73,6 +76,7 @@ class UsersController extends Controller
 
     public function getDetail($id) {
         $user = Users::find($id);
-        return view('userprofile',['user' => $user]);
+        $posts = $user->posts()->paginate(5);
+        return view('userprofile',['user' => $user,'posts' => $posts]);
     }
 }

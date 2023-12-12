@@ -41,7 +41,7 @@
 
     <div id="container">
 
-        <form action="process-login.php" method="POST">
+        <form action="{{ route('user.login') }}" method="POST">
 
             <input type="hidden" name="_token" value="{{csrf_token()}}">
 
@@ -76,6 +76,10 @@
             <button>Login</button>
 
         </form>
+
+        <div id="buttonRow">
+            <a href="/register"><button>Register</button></a>
+        </div>
 
     </div>
 

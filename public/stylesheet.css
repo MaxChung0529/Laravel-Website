@@ -72,3 +72,13 @@
     max-height: 100%;
     height: 200px;
 }
+
+#buttonRow {
+    display: flex;
+    width: 26vw;
+    flex-direction: row;
+}
+
+#registerButton {
+    display: flex;
+}

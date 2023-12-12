@@ -75,14 +75,17 @@
 
         <div id="menu">
 
-            <div id="settingSplitter" class="menuButtons">
+            <div id="profileSplitter" class="menuButtons">
+                <button onclick="showProfile()" class="menuButtons">
+                    <img src="{{Auth::user()->avatar}}" id="profileAvatar">
+                    <p>{{Auth::user()->user_name}}</p>
+                </button>
+            </div>
+
+            <div id="feedSplitter" class="menuButtons">
                 <a href="/feed" style="text-decoration: none;">
                     <button class="button">Feed</button>
                 </a>
-            </div>
-
-            <div id="profileSplitter" class="menuButtons">
-                <button class="button" onclick="showProfile()">Profile</button>
             </div>
 
             <div id="notificationSplitter" class="menuButtons">
@@ -98,7 +101,7 @@
             </div>
 
             <div id="logoutSplitter" class="menuButtons">
-                <a href="logout"><button class="button">Log Out</button></a>
+                <a href="{{ route('user.logout') }}"><button class="button">Log Out</button></a>
             </div>
         </div>
         <div id="feedContainer">
@@ -119,6 +122,7 @@
                                 style="color: black; text-decoration: none">
                                 <b>{{App\Models\Users::find($post->users_id)->user_name}}</b>
                             </a>
+                            <div class="time">{{$post->created_at}}</div>
 
                         </div>
 
@@ -134,7 +138,7 @@
                         {{$post->caption}}
                     </div>
 
-                    @if (Auth::user()->id == $post->users_id)
+                    @if (Auth::user()->id == $post->users_id || Auth::user()->role == 'Admin')
                     <div class="actions">
                         <a href="{{ route('post.edit', ['id' => $post->id]) }}"><button class="edit">Edit
                                 Post</button></a>
@@ -160,7 +164,7 @@
                         </div>
                         <div class="comment">{{$comment->comment}}</div>
 
-                        @if (Auth::user()->id == $comment->users_id)
+                        @if (Auth::user()->id == $comment->users_id || Auth::user()->role == 'Admin')
                         <div class="actions">
                             <button class="edit" onclick="showEditComment('{{$comment->id}}')">Edit
                                 Comment</button>
@@ -187,6 +191,7 @@
                                 style="color: black; text-decoration: none">
                                 <b>{{App\Models\Users::find($post->users_id)->user_name}}</b>
                             </a>
+                            <div class="time">{{$post->created_at}}</div>
 
                         </div>
 
@@ -198,12 +203,12 @@
                         {{$post->caption}}
                     </div>
 
-                    @if (Auth::user()->id == $post->users_id)
+                    @if (Auth::user()->id == $post->users_id || Auth::user()->role == 'Admin')
                     <div class="actions">
                         <a href="{{ route('post.edit', ['id' => $post->id]) }}"><button class="edit">Edit
                                 Post</button></a>
-                        <a href="{{ route('post.destroy', ['id' => $post->id]) }}"><button class="edit"
-                                id="delete-post" onclick="return confirm('Are you sure you want to delete this post?')">Delete
+                        <a href="{{ route('post.destroy', ['id' => $post->id]) }}"><button class="edit" id="delete-post"
+                                onclick="return confirm('Are you sure you want to delete this post?')">Delete
                                 Post</button></a>
                     </div>
                     @endif
@@ -224,12 +229,13 @@
                         </div>
                         <div class="comment">{{$comment->comment}}</div>
 
-                        @if (Auth::user()->id == $comment->users_id)
+                        @if (Auth::user()->id == $comment->users_id || Auth::user()->role == 'Admin')
                         <div class="actions">
                             <button class="edit" onclick="showEditComment('{{$comment->id}}')">Edit
                                 Comment</button>
                             <a href="{{ route('comment.destroy', ['id' => $comment->id]) }}"><button class="edit"
-                                    id="delete-comment" onclick="return confirm('Are you sure you want to delete this comment?')">Delete
+                                    id="delete-comment"
+                                    onclick="return confirm('Are you sure you want to delete this comment?')">Delete
                                     Comment</button></a>
                         </div>
                         @endif
@@ -305,7 +311,7 @@
                 event.preventDefault();
                 var form_data = $(this).serialize();
                 $.ajax({
-                    url: "add_comment.php",
+                    url: "{{ route('comment.add') }}",
                     method: "POST",
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -358,6 +364,7 @@
                 element.style.visibility = "visible";
             else
                 element.style.visibility = "hidden";
+            window.location.reload();
         }
 
         function showEditComment(id) {

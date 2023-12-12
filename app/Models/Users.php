@@ -16,6 +16,10 @@ class Users extends Model
         'avatar',
     ];
     
+    protected $attributes = [
+        'avatar' => 'Users',
+    ];
+    
     public function posts()
     {
         return $this->hasMany(Posts::class);    //Can create many posts
@@ -28,5 +32,9 @@ class Users extends Model
 
     public function notifications() {
         return $this->hasMany(Notification::class);
+    }
+
+    public function role() {
+        return $this->hasOne(Roles::class);
     }
 }
