@@ -5,7 +5,7 @@
 <head>
 
     <div id="head">
-        <a href="/index" style="color: black; text-decoration: none">
+        <a href="/feed" style="color: black; text-decoration: none">
 
             <h1 class="h1H" style="color: white; font-size: 80px;">FakeBook</h1>
 

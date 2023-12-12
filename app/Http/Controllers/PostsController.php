@@ -93,7 +93,7 @@ class PostsController extends Controller
 
         }
         $comment->save();
-        return redirect('feed');
+        return redirect()->back();
     }
 
     public function getComments(Request $request)
