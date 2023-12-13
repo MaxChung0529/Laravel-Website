@@ -22,7 +22,7 @@ class Users extends Model
     
     public function posts()
     {
-        return $this->hasMany(Posts::class);    //Can create many posts
+        return $this->hasMany(Posts::class);
     }
 
     public function comments()

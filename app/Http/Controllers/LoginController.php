@@ -22,10 +22,7 @@ class LoginController extends Controller
             return redirect('/feed');
         }
 
-        return redirect('/login')->withErrors(
-            [
-            ]
-        );
+        return redirect('/login')->with('alert','Login Fail! Please check your details again!');
     }
 
     public function logout(Request $request)

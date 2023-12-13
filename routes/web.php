@@ -44,6 +44,8 @@ Route::post('/process-login.php', [LoginController::class, 'authenticate'])->nam
 
 Route::get('/logout', [LoginController::class, 'logout'])->name('user.logout');
 
+Route::get('/notifications', [NotificationController::class, 'getNotifications'])->name('notification.get')->middleware('auth');
+
 Route::get('/{id}', [UsersController::class, 'getDetail'])->name('user.view')->middleware('auth');
 
 Route::post('update-profile.php', [UsersController::class, 'update'])->name('user.update');
@@ -63,8 +65,6 @@ Route::get('/?post_id={id}', function () {
 Route::get('/deletePost/{id}', [PostsController::class, 'deletePosts'])->name('post.destroy')->middleware('auth');
 
 Route::get('/feed', [PostsController::class, 'getPosts'])->middleware('auth');
-
-Route::get('/notifications', [NotificationController::class, 'getNotifications'])->name('notification.get')->middleware('auth');
 
 
 

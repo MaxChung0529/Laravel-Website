@@ -105,7 +105,7 @@
             </div>
         </div>
         <div id="feedContainer">
-            @foreach ($posts->reverse() as $post)
+            @foreach ($posts as $post)
             <div id="sectionContainer">
 
 
@@ -140,8 +140,7 @@
 
                     @if (Auth::user()->id == $post->users_id || Auth::user()->role == 'Admin')
                     <div class="actions">
-                        <a href="{{ route('post.edit', ['id' => $post->id]) }}"><button class="edit">Edit
-                                Post</button></a>
+                        <button class="edit" id="editPost">Edit Post</button>
                         <a href="{{ route('post.destroy', ['id' => $post->id]) }}"><button class="edit"
                                 id="delete-post">Delete
                                 Post</button></a>
@@ -205,8 +204,7 @@
 
                     @if (Auth::user()->id == $post->users_id || Auth::user()->role == 'Admin')
                     <div class="actions">
-                        <a href="{{ route('post.edit', ['id' => $post->id]) }}"><button class="edit">Edit
-                                Post</button></a>
+                        <button class="edit" id="editPost">Edit Post</button>
                         <a href="{{ route('post.destroy', ['id' => $post->id]) }}"><button class="edit" id="delete-post"
                                 onclick="return confirm('Are you sure you want to delete this post?')">Delete
                                 Post</button></a>
@@ -339,6 +337,10 @@
             } else {
                 hideCommentBox();
             }
+        });
+
+        $("#editPost").click(function () {
+            alert('We are working on it! Please wait for the next patch!')
         });
 
         $("#edit-comment-submit").click(function () {

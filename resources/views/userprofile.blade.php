@@ -106,7 +106,7 @@
         </div>
 
         <div id="feedContainer">
-            @foreach ($user->posts()->get() as $post)
+            @foreach ($posts as $post)
             <div id="sectionContainer">
 
 

@@ -21,9 +21,9 @@ class UsersController extends Controller
     public function register(Request $request)
     {
         $request->validate([
-            'email' => 'required | unique:users,email',
-            'user_name' => 'required | unique:users,user_name',
-            'password' => 'required',
+            'email' => ['required', 'email', 'unique:users,email'],
+            'password' => ['required'],
+            'user_name' => ['required','unique:users,user_name']
         ]);
 
         $user = new Users();
@@ -45,7 +45,10 @@ class UsersController extends Controller
 
         $user->save();
 
-        return redirect('/login')->with('success', 'Account successfully created');
+        return redirect('/login')->with('success', 'Account successfully created')->withErrors(
+            [
+            ]
+        );;
     }
 
     public function update(Request $request)
@@ -76,7 +79,7 @@ class UsersController extends Controller
 
     public function getDetail($id) {
         $user = Users::find($id);
-        $posts = $user->posts()->paginate(5);
+        $posts = $user->posts()->orderBy('id','desc')->paginate(5);
         return view('userprofile',['user' => $user,'posts' => $posts]);
     }
 }

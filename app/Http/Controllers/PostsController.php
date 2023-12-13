@@ -43,12 +43,8 @@ class PostsController extends Controller
 
     public function getPosts(Request $request)
     {
-        $posts = Posts::paginate(5);
+        $posts = Posts::orderBy('id','desc')->paginate(5);
         return view('feed', ['posts' => $posts]);
-    }
-
-    public function editPosts(Request $request)
-    {
     }
 
     public function deletePosts($id)
