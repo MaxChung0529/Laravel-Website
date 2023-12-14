@@ -52,9 +52,7 @@ Route::post('update-profile.php', [UsersController::class, 'update'])->name('use
 
 Route::post('/process-post.php', [PostsController::class, 'create'])->name('post.create');
 
-Route::get('/editPost/{postID}', function () {
-    return view('createPost');
-})->name('post.edit')->middleware('auth');
+Route::get('/editPost/{id}', [PostsController::class,'deletePosts'])->name('post.like');
 
 Route::get('/like/{postID}', [PostsController::class,'likePost'])->name('post.like');
 

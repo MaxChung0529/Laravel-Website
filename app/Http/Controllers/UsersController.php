@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Roles;
 use App\Models\Users;
 use Brick\Math\BigInteger;
 use Illuminate\Http\Request;
@@ -60,8 +61,10 @@ class UsersController extends Controller
 
         $user = Users::find(Auth::id());
 
-        if($request->has('new-userName')) {
+        if($request->input('new-userName')) {
             $user->user_name = $request->input('new-userName');
+
+            $user->save();
         }
 
 
@@ -70,9 +73,9 @@ class UsersController extends Controller
             $filename = $image->getClientOriginalName();
             $image->move('pic', $filename);
             $user->avatar = 'pic/' . $filename;
-        }
 
-        $user->save();
+            $user->save();
+        }
 
         return redirect('/feed');
     }

@@ -144,14 +144,18 @@
                         {{$post->caption}}
                     </div>
 
-                    @if (Auth::user()->id == $post->users_id || Auth::user()->role == 'Admin')
                     <div class="actions">
-                    <a href="{{ route('post.edit', ['postID' => $post->id]) }}"><button class="edit" id="editPost" value="{{$post->id}}">Edit Post</button></a>
+                        @if (Auth::user()->id == $post->users_id || Auth::user()->role == 'Admin' )
+                        <button class="edit" id="editPost" value="{{$post->id}}">Edit Post</button></a>
+                        @endif
+
+                        @if (Auth::user()->role == 'Admin' || Auth::user()->role == 'Cleaner' || Auth::user()->id ==
+                        $post->users_id)
                         <a href="{{ route('post.destroy', ['id' => $post->id]) }}"><button class="edit" id="delete-post"
                                 onclick="return confirm('Are you sure you want to delete this post?')">Delete
                                 Post</button></a>
+                        @endif
                     </div>
-                    @endif
 
                 </div>
 
@@ -169,15 +173,17 @@
                         </div>
                         <div class="comment">{{$comment->comment}}</div>
 
-                        @if (Auth::user()->id == $comment->users_id || Auth::user()->role == 'Admin')
                         <div class="actions">
+                            @if (Auth::user()->id == $comment->users_id || Auth::user()->role == 'Admin' || Auth::user()->id == $comment->users_id)
                             <button class="edit" onclick="showEditComment('{{$comment->id}}')">Edit
                                 Comment</button>
+                            @endif
+                            @if (Auth::user()->role == 'Admin' || Auth::user()->role == 'Cleaner' || Auth::user()->id == $comment->users_id)
                             <a href="{{ route('comment.destroy', ['id' => $comment->id]) }}"><button class="edit"
                                     id="delete-comment">Delete
                                     Comment</button></a>
+                            @endif
                         </div>
-                        @endif
                     </div>
 
                     @endforeach
@@ -208,15 +214,18 @@
                         {{$post->caption}}
                     </div>
 
-                    @if (Auth::user()->id == $post->users_id || Auth::user()->role == 'Admin')
                     <div class="actions">
-                        <a href="{{ route('post.edit', ['postID' => $post->id]) }}"><button class="edit" id="editPost" value="{{$post->id}}">Edit Post</button></a>
+                        @if (Auth::user()->id == $post->users_id || Auth::user()->role == 'Admin')
+                        <button class="edit" id="editPost" value="{{$post->id}}">Edit Post</button></a>
+
+                        @endif
+
+                        @if (Auth::user()->role == 'Admin' || Auth::user()->role == 'Cleaner' || Auth::user()->id == $post->users_id)
                         <a href="{{ route('post.destroy', ['id' => $post->id]) }}"><button class="edit" id="delete-post"
                                 onclick="return confirm('Are you sure you want to delete this post?')">Delete
                                 Post</button></a>
+                        @endif
                     </div>
-
-                    @endif
 
                     @if (!App\Models\Like::where('posts_id',$post->id)->where('users_id',Auth::id())->get()->first())
                     <button class="like" id="like" value="{{$post->id}}">Like</button>
@@ -240,16 +249,19 @@
                         </div>
                         <div class="comment">{{$comment->comment}}</div>
 
-                        @if (Auth::user()->id == $comment->users_id || Auth::user()->role == 'Admin')
                         <div class="actions">
+                            @if (Auth::user()->id == $comment->users_id || Auth::user()->role == 'Admin' || Auth::user()->id == $comment->users_id)
                             <button class="edit" onclick="showEditComment('{{$comment->id}}')">Edit
                                 Comment</button>
+                            @endif
+
+                            @if (Auth::user()->role == 'Admin' || Auth::user()->role == 'Cleaner' || Auth::user()->id == $comment->users_id)
                             <a href="{{ route('comment.destroy', ['id' => $comment->id]) }}"><button class="edit"
                                     id="delete-comment"
                                     onclick="return confirm('Are you sure you want to delete this comment?')">Delete
                                     Comment</button></a>
+                            @endif
                         </div>
-                        @endif
                     </div>
 
                     @endforeach
@@ -377,12 +389,10 @@
             }
         });
 
-        /*
 
         $("#editPost").click(function () {
             alert('We are working on it! Please wait for the next patch!')
         });
-        */
 
         $("#edit-comment-submit").click(function () {
             var comment = $("#newComment").val();

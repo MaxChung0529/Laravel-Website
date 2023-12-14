@@ -96,11 +96,8 @@ class PostsController extends Controller
 
         if ($user_id !== (Posts::find($comment->posts_id)->users_id)) {
             $notification_controller = new NotificationController;
-            $notification_controller->addNotification('App\Models\Comments',$comment->id);
+            $notification_controller->addCommentNotification($comment->id);
         }
-
-        //return redirect()->back();
-        return response()->json($comment);
     }
 
     public function editComment(Request $request)
@@ -132,22 +129,22 @@ class PostsController extends Controller
     public function deleteComments($id)
     {
         Comments::where('id',$id)->delete();
-        return redirect('/feed');
+        return redirect()->back();
     }
 
     public function likePost()
     {
-
         $user_id = Auth::id();
+
         $postID = $_GET['postID'];
         $like = new Like();
         $like->users_id = $user_id;
         $like->posts_id = $postID;
         $like->save();
 
-        if ($user_id !== (Posts::find($postID)->users_id)) {
+        if ($like->users_id !== (Posts::find($like->posts_id)->users_id)) {
             $notification_controller = new NotificationController;
-            $notification_controller->addNotification('App\Models\Like', $like->id);
+            $notification_controller->addLikeNotification($like);
         }
     }
 

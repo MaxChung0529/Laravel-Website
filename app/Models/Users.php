@@ -33,8 +33,4 @@ class Users extends Model
     public function notifications() {
         return $this->hasMany(Notification::class);
     }
-
-    public function role() {
-        return $this->hasOne(Roles::class);
-    }
 }

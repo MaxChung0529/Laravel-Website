@@ -123,7 +123,7 @@
                                 style="color: black; text-decoration: none">
                                 <b>{{App\Models\Users::find($post->users_id)->user_name}}</b>
                             </a>
-                                <div class="time">{{$post->created_at}}</div>
+                            <div class="time">{{$post->created_at}}</div>
 
                         </div>
 
@@ -133,21 +133,32 @@
                         <img src="{{$post->image}}" class="img">
                     </div>
 
+                    @if (!App\Models\Like::where('posts_id',$post->id)->where('users_id',Auth::id())->get()->first())
+                    <button class="like" id="like" value="{{$post->id}}">Like</button>
+                    @else
+                    <button class="liked" id="unlike" value="{{$post->id}}">Liked</button>
+                    @endif
+
                     <p class="postTitle">&#60;&#60;{{$post->post_title}}&#62;&#62;</p>
 
                     <div id="captionContainer">
                         {{$post->caption}}
                     </div>
 
-                    @if (Auth::user()->id == $post->users_id || Auth::user()->role == 'Admin')
                     <div class="actions">
-                        <a href="{{ route('post.edit', ['id' => $post->id]) }}"><button class="edit">Edit
-                                Post</button></a>
+                        @if (Auth::user()->id == $post->users_id || Auth::user()->role == 'Admin')
+                        <button class="edit" id="editPost">>Edit
+                            Post</button>
+                        @endif
+
+
+                        @if (Auth::user()->role == 'Admin' || Auth::user()->role == 'Cleaner' || Auth::user()->id ==
+                        $post->users_id)
                         <a href="{{ route('post.destroy', ['id' => $post->id]) }}"><button class="edit"
                                 id="delete-post">Delete
                                 Post</button></a>
+                        @endif
                     </div>
-                    @endif
 
                 </div>
 
@@ -165,15 +176,18 @@
                         </div>
                         <div class="comment">{{$comment->comment}}</div>
 
-                        @if (Auth::user()->id == $comment->users_id || Auth::user()->role == 'Admin')
                         <div class="actions">
+                            @if (Auth::user()->id == $comment->users_id || Auth::user()->role == 'Admin' || Auth::user()->id == $comment->users_id)
                             <button class="edit" onclick="showEditComment('{{$comment->id}}')">Edit
                                 Comment</button>
+                            @endif
+
+                            @if (Auth::user()->role == 'Admin' || Auth::user()->role == 'Cleaner' || Auth::user()->id == $comment->users_id)
                             <a href="{{ route('comment.destroy', ['id' => $comment->id]) }}"><button class="edit"
                                     id="delete-comment">Delete
                                     Comment</button></a>
+                            @endif
                         </div>
-                        @endif
                     </div>
 
                     @endforeach
@@ -192,7 +206,7 @@
                                 style="color: black; text-decoration: none">
                                 <b>{{App\Models\Users::find($post->users_id)->user_name}}</b>
                             </a>
-                                <div class="time">{{$post->created_at}}</div>
+                            <div class="time">{{$post->created_at}}</div>
 
                         </div>
 
@@ -204,14 +218,24 @@
                         {{$post->caption}}
                     </div>
 
-                    @if (Auth::user()->id == $post->users_id || Auth::user()->role == 'Admin')
                     <div class="actions">
-                        <a href="{{ route('post.edit', ['id' => $post->id]) }}"><button class="edit">Edit
-                                Post</button></a>
+                        @if (Auth::user()->id == $post->users_id || Auth::user()->role == 'Admin')
+                        <button class="edit" id="editPost">Edit
+                            Post</button>
+                        @endif
+
+                        @if (Auth::user()->role == 'Admin' || Auth::user()->role == 'Cleaner' || Auth::user()->id ==
+                        $post->users_id)
                         <a href="{{ route('post.destroy', ['id' => $post->id]) }}"><button class="edit" id="delete-post"
                                 onclick="return confirm('Are you sure you want to delete this post?')">Delete
                                 Post</button></a>
+                        @endif
                     </div>
+
+                    @if (!App\Models\Like::where('posts_id',$post->id)->where('users_id',Auth::id())->get()->first())
+                    <button class="like" id="like" value="{{$post->id}}">Like</button>
+                    @else
+                    <button class="liked" id="unlike" value="{{$post->id}}">Liked</button>
                     @endif
 
                 </div>
@@ -230,16 +254,19 @@
                         </div>
                         <div class="comment">{{$comment->comment}}</div>
 
-                        @if (Auth::user()->id == $comment->users_id || Auth::user()->role == 'Admin')
                         <div class="actions">
+                            @if (Auth::user()->id == $comment->users_id || Auth::user()->role == 'Admin' || Auth::user()->id == $comment->users_id)
                             <button class="edit" onclick="showEditComment('{{$comment->id}}')">Edit
                                 Comment</button>
+                            @endif
+
+                            @if (Auth::user()->role == 'Admin' || Auth::user()->role == 'Cleaner' || Auth::user()->id == $comment->users_id)
                             <a href="{{ route('comment.destroy', ['id' => $comment->id]) }}"><button class="edit"
                                     id="delete-comment"
                                     onclick="return confirm('Are you sure you want to delete this comment?')">Delete
                                     Comment</button></a>
+                            @endif
                         </div>
-                        @endif
                     </div>
 
                     @endforeach
@@ -300,6 +327,31 @@
             <span>
                 {{$posts->links()}}
             </span>
+            @foreach ($user->comments()->get() as $comment)
+            <div id="sectionContainer">
+                <div class="profileComment">
+
+                    <div id="profileContainer">
+
+                        <img src="{{$user->avatar}}" class="profilePic">
+
+                        <div id="userNameContainer">
+
+                            <a href="{{ route('user.view', ['id' => $post->users_id]) }}" id="name"
+                                style="color: black; text-decoration: none">
+                                <b>{{App\Models\Users::find($post->users_id)->user_name}}</b>
+                            </a>
+
+                        </div>
+
+                    </div>
+                    <p>POST ID: {{$comment->posts_id}}</p>
+                    <br>
+                    <i>COMMENT: "{{$comment->comment}}"</i>
+                </div>
+
+            </div>
+            @endforeach
         </div>
 
     </div>
@@ -312,23 +364,53 @@
                 event.preventDefault();
                 var form_data = $(this).serialize();
                 $.ajax({
-                    url: "add_comment.php",
+                    url: "{{ route('comment.add') }}",
                     method: "POST",
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
                     data: form_data,
                     dataType: "JSON",
-                    success: function (data) {
-                        if (data.error != '') {
-                            $('#comment_form')[0].reset();
-                            $('#comment_message').html(data.error);
-                            $('#comment_id').val('0');
-                            load_comment();
-                        }
-                    }
+                    success: function (data, status, xhr) {
+                        $("#body").val("");
+                        alert("comment added successfully");
+                        window.location.reload();
+                    },
                 })
             });
+        });
+
+
+        $(document).on('click', '#like', function () {
+            $(this).removeClass("like")
+            $(this).text("Liked")
+            $(this).attr({ "id": "unlike", "class": "liked" })
+            $.ajax({
+                type: "get",
+                url: "/like/{postID}",
+                data: {
+                    postID: $(this).val(), // < note use of 'this' here
+                },
+            });
+        });
+
+
+        $(document).on('click', '#unlike', function () {
+            $(this).removeClass("liked")
+            $(this).text("Like")
+            $(this).attr({ "id": "like", "class": "like" })
+            $.ajax({
+                type: "get",
+                url: "/unlike/{postID}",
+                data: {
+                    postID: $(this).val(), // < note use of 'this' here
+                },
+            });
+        });
+
+
+        $("#editPost").click(function () {
+            alert('We are working on it! Please wait for the next patch!')
         });
 
         $("#comment-submit").click(function () {

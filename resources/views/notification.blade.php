@@ -93,7 +93,14 @@
                     class="notificationProfile">
                     <div class="notificationName">{{App\Models\Users::find($notification->from_id)->user_name}}</div>
                 </a>
-                <p>commented on your post</p>
+
+                @if ($notification->comments_id != '')
+                    <p>commented on your post</p>
+                @else
+                    <p>liked your post</p>
+                @endif
+
+
                 <p class="notificationPostTitle">
                     &#60;&#60;{{App\Models\Posts::find(App\Models\Comments::find($notification->comments_id)->posts_id)->post_title}}&#62;&#62;
                 </p>
