@@ -499,3 +499,27 @@
     font-size: large;
     font-weight: bold;
 }
+
+.like {
+    font-size: 15px;
+    background-color: rgb(255, 206, 206);
+    border-radius: 10px;
+    height: 3vh;
+    width: 3vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.liked {
+    font-size: 15px;
+    background-color: rgb(255, 0, 0);
+    border-radius: 10px;
+    height: 3vh;
+    width: 3vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}

@@ -52,15 +52,21 @@ Route::post('update-profile.php', [UsersController::class, 'update'])->name('use
 
 Route::post('/process-post.php', [PostsController::class, 'create'])->name('post.create');
 
+Route::get('/editPost/{postID}', function () {
+    return view('createPost');
+})->name('post.edit')->middleware('auth');
+
+Route::get('/like/{postID}', [PostsController::class,'likePost'])->name('post.like');
+
+Route::get('/unlike/{postID}', [PostsController::class,'unlikePost'])->name('post.unlike');
+
 Route::post('/addComment', [PostsController::class, 'addComment'])->name('comment.add');
 
 Route::post('/editComment', [PostsController::class, 'editComment'])->name('comment.edit')->middleware('auth');
 
 Route::get('/destroyComment/{id}', [PostsController::class, 'deleteComments'])->name('comment.destroy')->middleware('auth');
 
-Route::get('/?post_id={id}', function () {
-    return view('editPost');
-})->name('post.edit')->middleware('auth');
+//Route::get('/editPost/{postID}', [PostsController::class,'editPost']);
 
 Route::get('/deletePost/{id}', [PostsController::class, 'deletePosts'])->name('post.destroy')->middleware('auth');
 

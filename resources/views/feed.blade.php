@@ -132,6 +132,12 @@
                         <img src="{{$post->image}}" class="img">
                     </div>
 
+                    @if (!App\Models\Like::where('posts_id',$post->id)->where('users_id',Auth::id())->get()->first())
+                    <button class="like" id="like" value="{{$post->id}}">Like</button>
+                    @else
+                    <button class="liked" id="unlike" value="{{$post->id}}">Liked</button>
+                    @endif
+
                     <p class="postTitle">&#60;&#60;{{$post->post_title}}&#62;&#62;</p>
 
                     <div id="captionContainer">
@@ -140,9 +146,9 @@
 
                     @if (Auth::user()->id == $post->users_id || Auth::user()->role == 'Admin')
                     <div class="actions">
-                        <button class="edit" id="editPost">Edit Post</button>
-                        <a href="{{ route('post.destroy', ['id' => $post->id]) }}"><button class="edit"
-                                id="delete-post">Delete
+                    <a href="{{ route('post.edit', ['postID' => $post->id]) }}"><button class="edit" id="editPost" value="{{$post->id}}">Edit Post</button></a>
+                        <a href="{{ route('post.destroy', ['id' => $post->id]) }}"><button class="edit" id="delete-post"
+                                onclick="return confirm('Are you sure you want to delete this post?')">Delete
                                 Post</button></a>
                     </div>
                     @endif
@@ -204,11 +210,18 @@
 
                     @if (Auth::user()->id == $post->users_id || Auth::user()->role == 'Admin')
                     <div class="actions">
-                        <button class="edit" id="editPost">Edit Post</button>
+                        <a href="{{ route('post.edit', ['postID' => $post->id]) }}"><button class="edit" id="editPost" value="{{$post->id}}">Edit Post</button></a>
                         <a href="{{ route('post.destroy', ['id' => $post->id]) }}"><button class="edit" id="delete-post"
                                 onclick="return confirm('Are you sure you want to delete this post?')">Delete
                                 Post</button></a>
                     </div>
+
+                    @endif
+
+                    @if (!App\Models\Like::where('posts_id',$post->id)->where('users_id',Auth::id())->get()->first())
+                    <button class="like" id="like" value="{{$post->id}}">Like</button>
+                    @else
+                    <button class="liked" id="unlike" value="{{$post->id}}">Liked</button>
                     @endif
 
                 </div>
@@ -316,15 +329,40 @@
                     },
                     data: form_data,
                     dataType: "JSON",
-                    success: function (data) {
-                        if (data.error != '') {
-                            $('#comment_form')[0].reset();
-                            $('#comment_message').html(data.error);
-                            $('#comment_id').val('0');
-                            load_comment();
-                        }
-                    }
+                    success: function (data, status, xhr) {
+                        $("#body").val("");
+                        alert("comment added successfully");
+                        window.location.reload();
+                    },
                 })
+            });
+        });
+
+
+        $(document).on('click', '#like', function () {
+            $(this).removeClass("like")
+            $(this).text("Liked")
+            $(this).attr({ "id": "unlike", "class": "liked" })
+            $.ajax({
+                type: "get",
+                url: "/like/{postID}",
+                data: {
+                    postID: $(this).val(), // < note use of 'this' here
+                },
+            });
+        });
+
+
+        $(document).on('click', '#unlike', function () {
+            $(this).removeClass("liked")
+            $(this).text("Like")
+            $(this).attr({ "id": "like", "class": "like" })
+            $.ajax({
+                type: "get",
+                url: "/unlike/{postID}",
+                data: {
+                    postID: $(this).val(), // < note use of 'this' here
+                },
             });
         });
 
@@ -339,9 +377,12 @@
             }
         });
 
+        /*
+
         $("#editPost").click(function () {
             alert('We are working on it! Please wait for the next patch!')
         });
+        */
 
         $("#edit-comment-submit").click(function () {
             var comment = $("#newComment").val();
@@ -391,7 +432,7 @@
         function hideProfile() {
             var element = document.getElementById("profile-page-popup-bg");
             if (element.style.visibility == "hidden")
-                element.style.visibility = "visible";
+                element.styisi = "visible";
             else
                 element.style.visibility = "hidden";
         }

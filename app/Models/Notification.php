@@ -19,8 +19,8 @@ class Notification extends Model
     {
         return $this->hasMany(Users::class);
     }
-    public function comment()
+    public function notifiable()
     {
-        return $this->hasOne(Users::class);
+        return $this->morphTo();
     }
 }

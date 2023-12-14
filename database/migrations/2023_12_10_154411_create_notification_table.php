@@ -12,6 +12,7 @@ return new class extends Migration {
     {
         Schema::create('notifications', function (Blueprint $table) {
             $table->id();
+            
             $table->bigInteger('to_id')->unsigned();
             $table->foreign('to_id')->references('id')->on('users')  //Reference to id of users receiving the notification
                 ->onUpdate('cascade')->onDelete('cascade');

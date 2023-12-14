@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comments;
+use App\Models\Like;
 use App\Models\Notification;
 use App\Models\Posts;
 use Illuminate\Http\Request;
@@ -44,12 +45,37 @@ class PostsController extends Controller
     public function getPosts(Request $request)
     {
         $posts = Posts::orderBy('id','desc')->paginate(5);
+
+        $user_id = Auth::id();
+
         return view('feed', ['posts' => $posts]);
+    }
+
+    public function editPost(Request $request)
+    {
+
+        $request->validate([
+            "newComment" => ['required'],
+        ]);
+
+        $comment_id = $request->input('comment_id');
+
+        $comment = Comments::find($comment_id);
+
+        if ($comment) {
+
+            $comment->comment = $request->input('newComment');
+
+        }
+        $comment->save();
+        return redirect()->back();
     }
 
     public function deletePosts($id)
     {
         Posts::where('id',$id)->delete();
+        Like::where('posts_id',$id)->delete();
+        Comments::where('posts_id',$id)->delete();
         return redirect('/feed');
     }
 
@@ -70,10 +96,11 @@ class PostsController extends Controller
 
         if ($user_id !== (Posts::find($comment->posts_id)->users_id)) {
             $notification_controller = new NotificationController;
-            $notification_controller->addNotification($comment->id);
+            $notification_controller->addNotification('App\Models\Comments',$comment->id);
         }
 
-        return redirect()->back();
+        //return redirect()->back();
+        return response()->json($comment);
     }
 
     public function editComment(Request $request)
@@ -106,5 +133,27 @@ class PostsController extends Controller
     {
         Comments::where('id',$id)->delete();
         return redirect('/feed');
+    }
+
+    public function likePost()
+    {
+
+        $user_id = Auth::id();
+        $postID = $_GET['postID'];
+        $like = new Like();
+        $like->users_id = $user_id;
+        $like->posts_id = $postID;
+        $like->save();
+
+        if ($user_id !== (Posts::find($postID)->users_id)) {
+            $notification_controller = new NotificationController;
+            $notification_controller->addNotification('App\Models\Like', $like->id);
+        }
+    }
+
+    public function unlikePost()
+    {
+        $postID = $_GET['postID'];
+        Like::where('posts_id',$postID)->where('users_id',Auth::id())->delete();
     }
 }
